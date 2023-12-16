@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
 
@@ -14,9 +16,12 @@ public class App {
                 .buildSessionFactory();
 
         try (Session session = sessionFactory.getCurrentSession()) {
-            Employee employee = new Employee("Ban");
             session.beginTransaction();
-            session.persist(employee);
+
+//            List<Employee> employeeList = session.createQuery("from Employee").getResultList();
+            List<Employee> employeeList = session.createNativeQuery("select * from employee").getResultList();
+            System.out.println(employeeList);
+
             session.getTransaction().commit();
         }
 
