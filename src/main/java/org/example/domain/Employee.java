@@ -1,9 +1,16 @@
 package org.example.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "employee")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
 public class Employee {
 
     @Id
@@ -14,34 +21,16 @@ public class Employee {
     @Column(name = "name")
     private String name;
 
-    public Employee() {
-    }
+    @Column(name = "second_name")
+    private String secondName;
 
-    public Employee(String name) {
-        this.name = name;
-    }
+    @Column(name = "department")
+    private String department;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "salary")
+    private Integer salary;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    @OneToOne(targetEntity = Detail.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "details_id")
+    private Detail empDetail;
 }

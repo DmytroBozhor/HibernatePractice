@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.domain.Detail;
 import org.example.domain.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,7 @@ public class App {
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Detail.class)
                 .buildSessionFactory();
 
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -22,10 +24,13 @@ public class App {
             List<Employee> employeeList = session.createNativeQuery("select * from employee").getResultList();
             System.out.println(employeeList);
 
+            if (!employeeList.isEmpty()) {
+                session.remove(employeeList.get(0));
+            }
+
             session.getTransaction().commit();
         }
 
         sessionFactory.close();
-
     }
 }
