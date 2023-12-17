@@ -1,4 +1,4 @@
-package org.example;
+package org.one_to_one_hibernate;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

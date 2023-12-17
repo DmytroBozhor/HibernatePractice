@@ -1,4 +1,4 @@
-package org.example.domain;
+package org.one_to_one_hibernate.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
