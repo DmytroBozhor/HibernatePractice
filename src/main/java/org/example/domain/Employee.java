@@ -30,7 +30,11 @@ public class Employee {
     @Column(name = "salary")
     private Integer salary;
 
-    @OneToOne(targetEntity = Detail.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //    If we use cascade, then hibernate will automatically
+    //    generate the same queries for other related entities, too.
+    @OneToOne(targetEntity = Detail.class,
+            cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH},
+            fetch = FetchType.EAGER)
     @JoinColumn(name = "details_id")
     private Detail empDetail;
 }

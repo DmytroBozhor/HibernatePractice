@@ -26,4 +26,9 @@ public class Detail {
 
     @Column(name = "email")
     private String email;
+
+    @OneToOne(mappedBy = "empDetail",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private Employee employee;
 }

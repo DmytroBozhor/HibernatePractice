@@ -17,16 +17,12 @@ public class App {
                 .addAnnotatedClass(Detail.class)
                 .buildSessionFactory();
 
+        // We have to close the session to avoid connection leaks
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
-//            List<Employee> employeeList = session.createQuery("from Employee").getResultList();
-            List<Employee> employeeList = session.createNativeQuery("select * from employee").getResultList();
-            System.out.println(employeeList);
-
-            if (!employeeList.isEmpty()) {
-                session.remove(employeeList.get(0));
-            }
+            Employee employee = session.get(Employee.class, 20);
+            System.out.println(employee);
 
             session.getTransaction().commit();
         }
