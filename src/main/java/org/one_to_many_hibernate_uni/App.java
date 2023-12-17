@@ -1,10 +1,10 @@
-package org.one_to_many_hibernate;
+package org.one_to_many_hibernate_uni;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.one_to_many_hibernate.domain.Department;
-import org.one_to_many_hibernate.domain.Employee;
+import org.one_to_many_hibernate_uni.domain.Department;
+import org.one_to_many_hibernate_uni.domain.Employee;
 
 public class App {
     public static void main(String[] args) {
@@ -31,7 +31,6 @@ public class App {
                     .build();
 
             department.getEmployeeList().add(employee);
-            employee.setDepartment(department);
 
             session.persist(department);
 

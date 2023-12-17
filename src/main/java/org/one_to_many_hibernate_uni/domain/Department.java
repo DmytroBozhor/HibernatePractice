@@ -1,4 +1,4 @@
-package org.one_to_many_hibernate.domain;
+package org.one_to_many_hibernate_uni.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,8 +36,8 @@ public class Department {
     //We would also not want to load all the employees right away. So it is better to set fetch = FetchType.LAZY.
     @OneToMany(targetEntity = Employee.class,
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "department")
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
     @ToString.Exclude
     @Builder.Default
     private List<Employee> employeeList = new ArrayList<>();
